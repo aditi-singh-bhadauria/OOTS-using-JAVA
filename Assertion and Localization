@@ -1,0 +1,109 @@
+Assertions in Java
+🔍 What Are Assertions?
+- An assertion is a statement used to test assumptions in your code.
+- It helps detect bugs during development by verifying that certain conditions hold true.
+- If an assertion fails, the JVM throws an AssertionError.
+
+🧠 Why Use Assertions?
+- To catch logical errors early.
+- To validate internal invariants during testing.
+- To document assumptions clearly in code.
+
+🔧 Syntax of Assertions
+assert condition;
+assert condition : "Error message if assertion fails";
+
+
+- condition must be a boolean expression.
+- The optional message helps identify the failure cause.
+
+🧪 Example: Assertion Usage
+public class AssertionDemo {
+    public static void main(String[] args) {
+        int age = 15;
+        assert age >= 18 : "Age must be 18 or above";
+        System.out.println("Age is valid: " + age);
+    }
+}
+
+
+🧪 Output (if assertions enabled):
+Exception in thread "main" java.lang.AssertionError: Age must be 18 or above
+
+
+
+⚙️ How to Enable Assertions
+Assertions are disabled by default. To enable:
+java -ea AssertionDemo
+
+
+- -ea stands for "enable assertions"
+
+🚫 When Not to Use Assertions
+- For validating user input (use exceptions instead)
+- In production code where failures must be handled gracefully
+
+🌐 Localization in Java
+🔍 What Is Localization?
+- Localization (L10n) is the process of adapting software for a specific region or language.
+- It involves translating messages, formatting dates/numbers, and handling cultural differences.
+
+🧠 Key Concepts
+- Locale: Represents a specific geographical, political, or cultural region.
+- ResourceBundle: Stores localized data (e.g., messages) in .properties files.
+- Message Formatting: Uses MessageFormat to insert dynamic values into localized strings.
+
+🔧 Syntax: Creating a Locale
+Locale locale = new Locale("fr", "FR");  // French in France
+
+
+
+📁 ResourceBundle Files
+Create files like:
+- Messages_en_US.properties
+- Messages_fr_FR.properties
+🔹 Messages_en_US.properties
+greeting=Hello
+farewell=Goodbye
+
+
+🔹 Messages_fr_FR.properties
+greeting=Bonjour
+farewell=Au revoir
+
+
+
+🧪 Example: Localization in Action
+import java.util.*;
+
+public class LocalizationDemo {
+    public static void main(String[] args) {
+        Locale locale = new Locale("fr", "FR");
+        ResourceBundle bundle = ResourceBundle.getBundle("Messages", locale);
+
+        System.out.println("Greeting: " + bundle.getString("greeting"));
+        System.out.println("Farewell: " + bundle.getString("farewell"));
+    }
+}
+
+
+🧪 Output (for French locale):
+Greeting: Bonjour
+Farewell: Au revoir
+
+
+
+🧵 How It Works
+- Java loads the appropriate .properties file based on the Locale.
+- ResourceBundle.getBundle() fetches the correct file.
+- You retrieve localized strings using getString("key").
+
+✅ Best Practices
+- Use Locale.getDefault() for system locale.
+- Keep .properties files UTF-8 encoded.
+- Use MessageFormat for dynamic messages:
+MessageFormat.format("Hello {0}", "Aditi");
+
+
+
+
