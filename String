@@ -1,0 +1,222 @@
+
+📘 Introduction to String Handling in Java
+In Java, strings are objects used to represent sequences of characters. The String class is immutable, while StringBuffer and StringBuilder are mutable alternatives for dynamic string manipulation.
+
+🧩 Types of Strings
+Java provides three main classes for handling strings:
+- String: Immutable. Once created, cannot be changed.
+- StringBuffer: Mutable and thread-safe. Suitable for multi-threaded environments.
+- StringBuilder: Mutable but not thread-safe. Faster than StringBuffer in single-threaded contexts.
+
+🔧 Common String Operations
+public class StringOps {
+    public static void main(String[] args) {
+        String s = "Java Programming";
+
+        System.out.println(s.length());               // 16
+        System.out.println(s.charAt(5));              // P
+        System.out.println(s.substring(5));           // Programming
+        System.out.println(s.toLowerCase());          // java programming
+        System.out.println(s.toUpperCase());          // JAVA PROGRAMMING
+        System.out.println(s.indexOf("gram"));        // 8
+        System.out.println(s.replace("Java", "C++")); // C++ Programming
+    }
+}
+
+
+
+🔒 Immutable String
+Strings in Java are immutable. Any operation that seems to modify a string actually creates a new object.
+public class ImmutableDemo {
+    public static void main(String[] args) {
+        String s1 = "Hello";
+        String s2 = s1.concat(" World");
+
+        System.out.println(s1); // Hello
+        System.out.println(s2); // Hello World
+    }
+}
+
+
+
+📚 Useful Methods of String Class
+- length() – returns the number of characters.
+- charAt(index) – returns character at given index.
+- substring(start, end) – extracts part of the string.
+- equals() – compares two strings.
+- equalsIgnoreCase() – compares ignoring case.
+- indexOf() – finds position of a substring.
+- replace() – replaces characters or substrings.
+- toLowerCase() / toUpperCase() – case conversion.
+- trim() – removes leading/trailing spaces.
+
+🧵 StringBuffer Class (Thread-Safe)
+public class BufferDemo {
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer("Hello");
+        sb.append(" World");
+        sb.insert(5, ",");
+        sb.replace(6, 11, "Java");
+        sb.reverse();
+
+        System.out.println(sb); // Output: avaJ ,olleH
+    }
+}
+
+
+
+🚀 StringBuilder Class (Non-Thread-Safe, Faster)
+public class BuilderDemo {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Code");
+        sb.append("Tantra");
+        sb.delete(0, 4);
+        sb.insert(0, "Java");
+
+        System.out.println(sb); // Output: JavaTantra
+    }
+}
+
+
+
+⚔️ Difference Between String, StringBuffer, and StringBuilder
+- Mutability:
+- String: Immutable
+- StringBuffer: Mutable
+- StringBuilder: Mutable
+- Thread Safety:
+- String: Safe by design (immutable)
+- StringBuffer: Thread-safe (synchronized methods)
+- StringBuilder: Not thread-safe
+- Performance:
+- String: Slow for frequent modifications
+- StringBuffer: Slower than StringBuilder due to synchronization
+- StringBuilder: Fastest for single-threaded operations
+- Use Case:
+- String: When content doesn’t change
+- StringBuffer: When multiple threads modify the string
+- StringBuilder: When string changes frequently in a single thread
+
+Would you like me to format this into a CodeTantra-ready README or add dry-run examples for each method?
+ String Comparison
+✅ Using equals() vs ==
+public class CompareStrings {
+    public static void main(String[] args) {
+        String a = "hello";
+        String b = "hello";
+        String c = new String("hello");
+
+        System.out.println(a == b);       // true (same reference from string pool)
+        System.out.println(a == c);       // false (different object)
+        System.out.println(a.equals(c));  // true (same content)
+    }
+}
+
+
+
+🔍 Searching in Strings
+✅ contains(), startsWith(), endsWith()
+public class SearchString {
+    public static void main(String[] args) {
+        String s = "CodeTantra Java Lab";
+
+        System.out.println(s.contains("Java"));       // true
+        System.out.println(s.startsWith("Code"));     // true
+        System.out.println(s.endsWith("Lab"));        // true
+    }
+}
+
+
+
+🔄 String Modification
+✅ replace(), replaceAll(), split()
+public class ModifyString {
+    public static void main(String[] args) {
+        String s = "apple,banana,grape";
+
+        String replaced = s.replace("banana", "mango");
+        String[] fruits = s.split(",");
+
+        System.out.println(replaced); // apple,mango,grape
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}
+
+
+
+🧪 StringBuffer Advanced
+✅ Capacity and Efficiency
+public class BufferCapacity {
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer();
+        System.out.println(sb.capacity()); // 16 (default)
+
+        sb.append("HelloWorldJava");
+        System.out.println(sb.capacity()); // Still 16
+
+        sb.append("ExtraCharactersToExpand");
+        System.out.println(sb.capacity()); // Grows automatically
+    }
+}
+
+
+
+🧪 StringBuilder Advanced
+✅ Chained Operations
+public class BuilderChain {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("Java");
+
+        sb.append("Lab").insert(4, "-").reverse();
+
+        System.out.println(sb); // Output: baL-avaJ
+    }
+}
+
+
+
+🧪 Converting Between Types
+✅ String ↔ char[], String ↔ byte[]
+public class ConvertTypes {
+    public static void main(String[] args) {
+        String s = "Hello";
+
+        char[] chars = s.toCharArray();
+        byte[] bytes = s.getBytes();
+
+        String fromChars = new String(chars);
+        String fromBytes = new String(bytes);
+
+        System.out.println(fromChars); // Hello
+        System.out.println(fromBytes); // Hello
+    }
+}
+
+
+
+🧪 StringBuilder vs StringBuffer Performance
+✅ Simple Benchmark
+public class PerformanceTest {
+    public static void main(String[] args) {
+        long start, end;
+
+        StringBuffer sbf = new StringBuffer();
+        start = System.nanoTime();
+        for (int i = 0; i < 10000; i++) sbf.append("A");
+        end = System.nanoTime();
+        System.out.println("StringBuffer: " + (end - start) + " ns");
+
+        StringBuilder sbd = new StringBuilder();
+        start = System.nanoTime();
+        for (int i = 0; i < 10000; i++) sbd.append("A");
+        end = System.nanoTime();
+        System.out.println("StringBuilder: " + (end - start) + " ns");
+    }
+}
+
+
+
+
+
