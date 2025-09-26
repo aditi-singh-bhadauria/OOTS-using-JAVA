@@ -1,0 +1,193 @@
+🧠 Multithreading in Java – Theory, Syntax & Examples
+
+🔍 What Is Multithreading?
+- Multithreading is a programming technique where multiple threads run concurrently within a single process.
+- It improves performance by utilizing CPU efficiently.
+- Each thread runs independently but shares the same memory space.
+
+🧩 Key Concepts
+- Thread: A lightweight sub-process, the smallest unit of execution.
+- Main Thread: The default thread that starts when a Java program runs.
+- Concurrency: Multiple threads executing simultaneously.
+- Parallelism: Threads running truly in parallel (on multi-core processors).
+
+🔄 Life Cycle of a Thread
+- New: Thread is created but not started.
+- Runnable: Thread is ready to run and waiting for CPU.
+- Running: Thread is executing.
+- Blocked/Waiting: Thread is paused, waiting for resources or signal.
+- Terminated: Thread has finished execution or was stopped.
+
+🔧 How to Create a Thread in Java
+✅ Method 1: Extending Thread Class
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running...");
+    }
+}
+
+public class ThreadDemo1 {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start();  // starts the thread
+    }
+}
+
+
+
+✅ Method 2: Implementing Runnable Interface
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable thread is running...");
+    }
+}
+
+public class ThreadDemo2 {
+    public static void main(String[] args) {
+        MyRunnable r = new MyRunnable();
+        Thread t2 = new Thread(r);
+        t2.start();
+    }
+}
+
+
+
+✅ Method 3: Using Lambda Expression (Java 8+)
+public class ThreadDemo3 {
+    public static void main(String[] args) {
+        Thread t3 = new Thread(() -> {
+            System.out.println("Lambda thread is running...");
+        });
+        t3.start();
+    }
+}
+
+
+
+🧪 Sample Output
+Thread is running...
+Runnable thread is running...
+Lambda thread is running...
+
+
+
+🧵 Thread Methods
+- start() – Starts the thread
+- run() – Contains the code to execute
+- sleep(ms) – Pauses thread for milliseconds
+- join() – Waits for another thread to finish
+- getName() – Returns thread name
+- setPriority() – Sets thread priority
+- isAlive() – Checks if thread is still running
+
+🧪 Example: Multiple Threads with Sleep
+class CountThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(getName() + " Count: " + i);
+            try {
+                Thread.sleep(500);  // pause for 500ms
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted.");
+            }
+        }
+    }
+}
+
+public class MultiThreadDemo {
+    public static void main(String[] args) {
+        CountThread t1 = new CountThread();
+        CountThread t2 = new CountThread();
+        t1.setName("Thread-A");
+        t2.setName("Thread-B");
+        t1.start();
+        t2.start();
+    }
+}
+
+
+
+✅ Best Practices
+- Always use Runnable for better flexibility (especially with thread pools).
+- Avoid using Thread.stop() — it's deprecated and unsafe.
+- Use synchronization to avoid race conditions when threads share resources.
+- Prefer ExecutorService for managing multiple threads in real-world apps.
+
+Would
+
+
+Here’s a clear and modular breakdown of Java thread creation using:
+- Extending the Thread class
+- Implementing the Runnable interface
+- Using Thread constructor with a String name
+- Using Runnable with a String name
+
+🧵 1. Extending Thread Class
+class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name); // Set thread name using constructor
+    }
+
+    public void run() {
+        System.out.println("Thread running: " + getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread("Thread-Extends");
+        t1.start();
+    }
+}
+
+
+
+🧵 2. Implementing Runnable Interface
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable thread running");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyRunnable r = new MyRunnable();
+        Thread t2 = new Thread(r); // Thread created with Runnable
+        t2.start();
+    }
+}
+
+
+
+🧵 3. Using Thread Constructor with String Name
+public class Main {
+    public static void main(String[] args) {
+        Thread t3 = new Thread("NamedThread") {
+            public void run() {
+                System.out.println("Thread name: " + getName());
+            }
+        };
+        t3.start();
+    }
+}
+
+
+
+🧵 4. Using Runnable with Thread(String name)
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable with named thread: " + Thread.currentThread().getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Runnable r = new MyRunnable();
+        Thread t4 = new Thread(r, "RunnableThread-4");
+        t4.start();
+    }
+}
+
+
+
+
