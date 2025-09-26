@@ -1,0 +1,125 @@
+What Is a Package in Java?
+A package is a namespace that organizes classes and interfaces. It helps avoid name conflicts and makes code modular, maintainable, and discoverable — perfect for your GitHub and CodeTantra goals.
+
+
+✅ Advantages of Packages
+- Modularity: Organizes code into logical units
+- Reusability: Classes can be reused across projects
+- Encapsulation: Access control via modifiers
+- Avoids Name Conflicts: Unique namespaces
+- Discoverability: Easier to locate and document
+
+🧪 How to Create a Package
+🔹 Syntax
+package packagename;
+
+
+
+🔐 Access Modifiers in Java
+- Public
+- Accessible from any class in any package.
+- Used for APIs and reusable components.
+- Protected
+- Accessible within the same package and subclasses (even in different packages).
+- Ideal for inheritance-based designs.
+- Default (Package-Private)
+- No keyword used.
+- Accessible only within the same package.
+- Good for internal helpers or utilities.
+- Private
+- Accessible only within the same class.
+- Used for encapsulation and data hiding.
+
+📦 User-Defined Packages
+- Created by the programmer to organize related classes.
+- Helps modularize code for billing systems, scheduling, DSA utilities, etc.
+- Syntax:
+package com.aditi.utils;
+- Must match folder structure: com/aditi/utils/MessagePrinter.java
+- Access using:
+import com.aditi.utils.MessagePrinter;
+
+
+
+📚 Predefined Packages
+- java.lang
+- Core classes like String, Math, System
+- Auto-imported
+- java.util
+- Collections, Scanner, Date, ArrayList
+- java.io
+- File handling: File, BufferedReader, InputStream
+- java.net
+- Networking: Socket, URL, HttpURLConnection
+- java.sql
+- Database connectivity: Connection, Statement, ResultSet
+
+
+🔹 Example
+package com.aditi.billing;
+
+public class BillCalculator {
+    public void generateBill() {
+        System.out.println("Bill generated.");
+    }
+}
+
+
+
+🧵 How to Use a Package
+🔹 Importing
+import com.aditi.billing.BillCalculator;
+
+public class Main {
+    public static void main(String[] args) {
+        BillCalculator bc = new BillCalculator();
+        bc.generateBill();
+    }
+}
+
+
+
+🧱 Sub-Packages
+Sub-packages are packages within packages.
+package com.aditi.billing.tax;
+
+public class GST {
+    public void applyGST() {
+        System.out.println("GST applied.");
+    }
+}
+
+
+Use it like:
+import com.aditi.billing.tax.GST;
+
+
+
+
+
+
+🧑‍💻 Full Example: User-Defined Package
+🔹 File: com/aditi/utils/MessagePrinter.java
+package com.aditi.utils;
+
+public class MessagePrinter {
+    public void printMessage(String msg) {
+        System.out.println("Message: " + msg);
+    }
+}
+
+
+🔹 File: Main.java
+import com.aditi.utils.MessagePrinter;
+
+public class Main {
+    public static void main(String[] args) {
+        MessagePrinter mp = new MessagePrinter();
+        mp.printMessage("Hello from Aditi's package!");
+    }
+}
+
+
+🧪 Output:
+Message: Hello from Aditi's package!
+
