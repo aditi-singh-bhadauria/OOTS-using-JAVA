@@ -1,5 +1,5 @@
 THEOREY:
-📘 Lambda Expression in Java — Theory Points
+Lambda Expression in Java — Theory Points
 - Definition:
 A lambda expression is a concise way to represent a method using only its logic — without writing the full method declaration.
 - Used With:
@@ -93,5 +93,6 @@ public class MultipleParamLambda {
         System.out.println("Sum: " + result);
     }
 }
+
 
 
