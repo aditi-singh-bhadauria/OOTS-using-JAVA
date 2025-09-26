@@ -1,0 +1,339 @@
+ What Is an Exception?
+An exception is an event that disrupts the normal flow of a program. It occurs during runtime and can be handled using Java’s built-in mechanisms.
+
+🔍 Difference Between Error and Exception
+- Error: Serious issues like OutOfMemoryError, StackOverflowError. Not meant to be handled.
+- Exception: Recoverable issues like IOException, ArithmeticException. Can be handled using try-catch.
+
+🧩 Types of Exceptions
+✅ Checked Exceptions
+- Checked at compile time
+- Must be handled using try-catch or declared using throws
+- Examples: IOException, SQLException, FileNotFoundException
+
+✅ Unchecked Exceptions
+- Checked at runtime
+- Caused by programming errors
+- Examples: ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException
+
+🔐 Exception Handling Keywords
+1. try
+Defines a block of code to monitor for exceptions.
+2. catch
+Defines a block of code to handle the exception.
+3. finally
+Defines a block that always executes, regardless of exception.
+4. throw
+Used to explicitly throw an exception.
+5. throws
+Used to declare exceptions that a method might throw.
+
+🔧 Syntax Overview
+try {
+    // risky code
+} catch (ExceptionType e) {
+    // handling code
+} finally {
+    // cleanup code
+}
+
+
+
+🧪 Code Examples
+✅ Example 1: Basic try-catch
+public class TryCatchDemo {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Division by zero.");
+        }
+    }
+}
+
+
+
+✅ Example 2: try-catch-finally
+public class FinallyDemo {
+    public static void main(String[] args) {
+        try {
+            String str = null;
+            System.out.println(str.length());
+        } catch (NullPointerException e) {
+            System.out.println("Caught NullPointerException.");
+        } finally {
+            System.out.println("Finally block executed.");
+        }
+    }
+}
+
+
+
+✅ Example 3: throw keyword
+public class ThrowDemo {
+    public static void main(String[] args) {
+        int age = 15;
+        if (age < 18) {
+            throw new ArithmeticException("Not eligible to vote.");
+        }
+    }
+}
+
+
+
+✅ Example 4: throws keyword
+import java.io.*;
+
+public class ThrowsDemo {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Enter your name: ");
+        String name = reader.readLine();
+        System.out.println("Hello, " + name);
+    }
+}
+
+
+
+🛠 User-Defined Exception
+You can create your own exception class by extending Exception or RuntimeException.
+🔹 Step-by-Step:
+- Create a class that extends Exception
+- Define a constructor with a custom message
+- Use throw to raise it
+- Handle it using try-catch
+
+✅ Example: Custom Age Validation Exception
+// Step 1: Define custom exception
+class AgeException extends Exception {
+    public AgeException(String message) {
+        super(message);
+    }
+}
+
+// Step 2: Use it in a program
+public class UserDefinedExceptionDemo {
+    public static void main(String[] args) {
+        try {
+            validateAge(16);
+        } catch (AgeException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+    }
+
+    static void validateAge(int age) throws AgeException {
+        if (age < 18) {
+            throw new AgeException("Age must be 18 or above.");
+        } else {
+            System.out.println("Valid age.");
+        }
+    }
+}
+
+
+🧪 Output:
+Caught Exception: Age must be 18 or above.
+
+
+
+✅ Example: Custom Bank Exception
+// Custom exception class
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+// Main class
+public class BankTransaction {
+    public static void main(String[] args) {
+        try {
+            withdraw(500, 1000);
+        } catch (InsufficientFundsException e) {
+            System.out.println("Transaction failed: " + e.getMessage());
+        }
+    }
+
+    static void withdraw(int balance, int amount) throws InsufficientFundsException {
+        if (amount > balance) {
+            throw new InsufficientFundsException("Insufficient balance.");
+        } else {
+            System.out.println("Withdrawal successful.");
+        }
+    }
+}
+
+
+🧪 Output:
+Transaction failed: Insufficient balance.
+
+
+
+📌 Best Practices
+- Always catch specific exceptions first, then general ones.
+- Use finally for cleanup like closing files or connections.
+- Avoid swallowing exceptions silently.
+- Use custom exceptions for domain-specific errors (e.g., billing, scheduling).
+
+Would you like me to wrap this into a GitHub README with SEO tags and dry-run tables? Or modularize it for your billing or OS scheduling system with exception handling layers?
+4. throw
+Used to explicitly throw an exception.
+5. throws
+Used to declare exceptions that a method might throw.
+
+🔧 Syntax Overview
+try {
+    // risky code
+} catch (ExceptionType e) {
+    // handling code
+} finally {
+    // cleanup code
+}
+
+🧪 Code Examples
+✅ Example 1: Basic try-catch
+public class TryCatchDemo {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Division by zero.");
+        }
+    }
+}
+
+✅ Example 2: try-catch-finally
+public class FinallyDemo {
+    public static void main(String[] args) {
+        try {
+            String str = null;
+            System.out.println(str.length());
+        } catch (NullPointerException e) {
+            System.out.println("Caught NullPointerException.");
+        } finally {
+            System.out.println("Finally block executed.");
+        }
+    }
+}
+
+
+
+✅ Example 3: throw keyword
+public class ThrowDemo {
+    public static void main(String[] args) {
+        int age = 15;
+        if (age < 18) {
+            throw new ArithmeticException("Not eligible to vote.");
+        }
+    }
+}
+
+✅ Example 4: throws keyword
+import java.io.*;
+
+public class ThrowsDemo {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Enter your name: ");
+        String name = reader.readLine();
+        System.out.println("Hello, " + name);
+    }
+}
+
+
+
+
+Types of Exceptions in Java
+Java exceptions are broadly categorized into:
+✅ 1. Built-in Exceptions
+These are part of the Java API and automatically thrown by the JVM or Java libraries.
+🔹 Common Checked Exceptions (Compile-Time)
+- IOException – Issues during input/output operations
+- FileNotFoundException – File not found while reading
+- SQLException – Database access errors
+- ClassNotFoundException – Class not found during runtime
+- InterruptedException – Thread interruption
+🔹 Common Unchecked Exceptions (Runtime)
+- ArithmeticException – Division by zero
+- NullPointerException – Accessing a null object
+- ArrayIndexOutOfBoundsException – Invalid array index
+- NumberFormatException – Improper string-to-number conversion
+- IllegalArgumentException – Invalid method argument
+
+✅ 2. User-Defined Exceptions
+These are custom exceptions created by developers to handle domain-specific errors.
+🔹 How to Create a User-Defined Exception
+- Extend the Exception class (for checked) or RuntimeException (for unchecked).
+- Define a constructor with a custom message.
+- Use throw to raise it.
+- Handle it using try-catch.
+
+🧪 Example 1: Custom Age Validation Exception
+// Step 1: Define custom exception
+class AgeException extends Exception {
+    public AgeException(String message) {
+        super(message);
+    }
+}
+
+// Step 2: Use it in a program
+public class AgeValidator {
+    public static void main(String[] args) {
+        try {
+            validateAge(16);
+        } catch (AgeException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+    }
+
+    static void validateAge(int age) throws AgeException {
+        if (age < 18) {
+            throw new AgeException("Age must be 18 or above.");
+        } else {
+            System.out.println("Valid age.");
+        }
+    }
+}
+
+
+
+🧪 Example 2: Custom Bank Transaction Exception
+// Custom exception class
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+// Main class
+public class BankTransaction {
+    public static void main(String[] args) {
+        try {
+            withdraw(500, 1000);
+        } catch (InsufficientFundsException e) {
+            System.out.println("Transaction failed: " + e.getMessage());
+        }
+    }
+
+    static void withdraw(int balance, int amount) throws InsufficientFundsException {
+        if (amount > balance) {
+            throw new InsufficientFundsException("Insufficient balance.");
+        } else {
+            System.out.println("Withdrawal successful.");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
